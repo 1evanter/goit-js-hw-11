@@ -14,5 +14,5 @@ const e={formEl:document.querySelector(".search-form"),loadMoreBtn:document.quer
         <p class="image-downloads">Downloads: ${n}</p>
         </div>
         </div>
-      </li>`).join("");return e.imageListEl.insertAdjacentHTML("beforeend",a)}e.formEl.addEventListener("submit",function(e){e.preventDefault(),t.query=e.target.elements.searchQuery.value,t.resetPage(),t.fetchImages().then(a)}),e.loadMoreBtn.addEventListener("click",function(){t.fetchImages().then(a)});
-//# sourceMappingURL=index.25dca1f1.js.map
+      </li>`).join("");return e.imageListEl.insertAdjacentHTML("beforeend",a)}function s(){e.imageListEl.innerHTML=""}e.formEl.addEventListener("submit",function(e){e.preventDefault(),s(),t.query=e.target.elements.searchQuery.value,t.resetPage(),t.fetchImages().then(e=>{s(),a(e)})}),e.loadMoreBtn.addEventListener("click",function(){t.fetchImages().then(a)});
+//# sourceMappingURL=index.af0470b8.js.map
