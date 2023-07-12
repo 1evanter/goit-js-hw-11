@@ -18,9 +18,13 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 function onSearch(evt) {
     evt.preventDefault();
 
+    clearImageList();
     imagesApiService.query = evt.target.elements.searchQuery.value;
     imagesApiService.resetPage();
-    imagesApiService.fetchImages().then(addImageCard);
+    imagesApiService.fetchImages().then(hits => {
+        clearImageList();
+        addImageCard(hits)
+    });
 }
 
 function onLoadMore() {
@@ -50,6 +54,10 @@ function addImageCard(hits) {
  }).join('');
     
    return refs.imageListEl.insertAdjacentHTML('beforeend', galleryElements);
+}
+
+function clearImageList() {
+    refs.imageListEl.innerHTML = '';
 }
 
 
