@@ -15,11 +15,11 @@ export default class ImagesApiService{
     //     const res = await axios.get(`${BASE_URL}`, {
     //         params: {
     //       key: API_KEY,
-    //       q: `${this.searchQuery}`,
+    //       q: this.searchQuery,
     //       image_type: "photo",
     //       orientation: "horizontal",
     //       safesearch: true,
-    //       page: `${this.page}`,
+    //       page: this.page,
     //       per_page: 40,
     //     }
     //    });
