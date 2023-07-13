@@ -13,5 +13,5 @@
         <p class="info-item"><b>Downloads: ${s}</b></p>
         </div>
         </div>
-     `).join("");m.galleryEl.insertAdjacentHTML("beforeend",e);let o=new(n&&n.__esModule?n.default:n)(".gallery a",{captionDelay:250,captionsData:"alt"});o.refresh()}m.loadMoreBtn.style.display="none",m.formEl.addEventListener("submit",h),m.loadMoreBtn.addEventListener("click",u)}();
-//# sourceMappingURL=index.b824aaac.js.map
+     `).join("");m.galleryEl.insertAdjacentHTML("beforeend",e),function(){let t=new(n&&n.__esModule?n.default:n)(".gallery a",{captionDelay:250,captionsData:"alt"});t.refresh()}()}m.loadMoreBtn.style.display="none",m.formEl.addEventListener("submit",h),m.loadMoreBtn.addEventListener("click",u)}();
+//# sourceMappingURL=index.3cfd93f8.js.map

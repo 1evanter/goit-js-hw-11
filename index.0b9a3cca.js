@@ -13,5 +13,5 @@ var t="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"u
         <p class="info-item"><b>Downloads: ${s}</b></p>
         </div>
         </div>
-     `).join("");d.galleryEl.insertAdjacentHTML("beforeend",e);let i=new(o&&o.__esModule?o.default:o)(".gallery a",{captionDelay:250,captionsData:"alt"});i.refresh()}d.loadMoreBtn.style.display="none",d.formEl.addEventListener("submit",m),d.loadMoreBtn.addEventListener("click",p);
-//# sourceMappingURL=index.e8623d68.js.map
+     `).join("");d.galleryEl.insertAdjacentHTML("beforeend",e),function(){let t=new(o&&o.__esModule?o.default:o)(".gallery a",{captionDelay:250,captionsData:"alt"});t.refresh()}()}d.loadMoreBtn.style.display="none",d.formEl.addEventListener("submit",m),d.loadMoreBtn.addEventListener("click",p);
+//# sourceMappingURL=index.0b9a3cca.js.map
