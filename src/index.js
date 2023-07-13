@@ -3,8 +3,6 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 import ImagesApiService from "./js/pixabay-api";
 
-const API_KEY = '38212223-f32e704a5bd5b7c02deacefa3';
-
 const refs = {
     formEl: document.querySelector('.search-form'),
     loadMoreBtn: document.querySelector('.load-more'),
@@ -76,16 +74,19 @@ function addImageCard(hits) {
     
     refs.galleryEl.insertAdjacentHTML('beforeend', galleryElements);
 
-    const lightbox = new SimpleLightbox('.gallery a', {
-    captionDelay: 250,
-    captionsData: "alt",
-  });
-    lightbox.refresh();
-    
-    return;
+    createLightBox();
 }
 
 function clearImageList() {
     refs.galleryEl.innerHTML = '';
 }
 
+function createLightBox() {
+   const lightbox = new SimpleLightbox('.gallery a', {
+    captionDelay: 250,
+    captionsData: "alt",
+  });
+    lightbox.refresh();
+
+    return;
+}
