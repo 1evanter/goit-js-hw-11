@@ -1,6 +1,6 @@
-// import axios from 'axios';
-// axios.defaults.headers.common["x-api-key"] = "38212223-f32e704a5bd5b7c02deacefa3";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 import ImagesApiService from "./js/pixabay-api";
 
 const API_KEY = '38212223-f32e704a5bd5b7c02deacefa3';
@@ -18,7 +18,7 @@ refs.loadMoreBtn.style.display = 'none';
 refs.formEl.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
-function onSearch(evt) {
+async function onSearch(evt) {
     evt.preventDefault();
     
     imagesApiService.query = evt.target.elements.searchQuery.value;
@@ -28,31 +28,42 @@ function onSearch(evt) {
     };
     
     imagesApiService.resetPage();
-    imagesApiService.fetchImages().then(hits => {
-          if (hits.length === 0) {
-    return  Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+
+try {
+    const hits = await imagesApiService.fetchImages();
+    if (hits.length === 0) {
+        return Notify.failure("Sorry, there are no images matching your search query. Please try again.");
     }
-        clearImageList();
+      clearImageList();
         addImageCard(hits);
           refs.loadMoreBtn.style.display = 'block';
-    });
+} catch (error) {
+    throw new Error(error);
 }
 
-function onLoadMore() {
-     imagesApiService.fetchImages().then(addImageCard);
+}
+
+async function onLoadMore() {
+    const hits = await imagesApiService.fetchImages();
+    try {
+        addImageCard(hits);
+    } catch (error) {
+        throw new Error(error)
+    }
+    //  imagesApiService.fetchImages().then(addImageCard);
 }
 
 
 function addImageCard(hits) {
- const galleryElements = hits.map(({ webformatURL, tags, likes, views, comments, downloads }) => {
+ const galleryElements = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
      return   `
-     <div class="gallery-item-wrap">
-        <img
+     <div class="photo-card">
+       <a href="${largeImageURL}"> <img
           class="image"
           src="${webformatURL}"
           alt="${tags}"
           loading="lazy"
-        />
+        /> </a>
         <div class="info">
         <p class="info-item"> <b> Likes: ${likes}</b></p>
         <p class="info-item"><b>Views: ${views}</b></p>
@@ -63,13 +74,18 @@ function addImageCard(hits) {
      `
  }).join('');
     
-   return refs.galleryEl.insertAdjacentHTML('beforeend', galleryElements);
+    refs.galleryEl.insertAdjacentHTML('beforeend', galleryElements);
+
+    const lightbox = new SimpleLightbox('.gallery a', {
+    captionDelay: 250,
+    captionsData: "alt",
+  });
+    lightbox.refresh();
+    
+    return;
 }
 
 function clearImageList() {
     refs.galleryEl.innerHTML = '';
 }
-
-
-
 
