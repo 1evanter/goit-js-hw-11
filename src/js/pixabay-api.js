@@ -14,7 +14,7 @@ export default class ImagesApiService{
             if (res.ok) {
                 return res.json()
             }
-            throw new Error(res.statusText)
+            throw new Error(res.status)
         }).then(({ hits }) => {
             this.incrementPage();
          

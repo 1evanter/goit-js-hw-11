@@ -13,7 +13,7 @@ const refs = {
 
 const imagesApiService = new ImagesApiService();
 
-// refs.loadMoreBtn.style.display = 'none';
+refs.loadMoreBtn.style.display = 'none';
 
 refs.formEl.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
@@ -50,10 +50,10 @@ function addImageCard(hits) {
         <img
           class="image"
           src="${webformatURL}"
-      
           alt="${tags}"
+          loading="lazy"
         />
-        <div class="image-info">
+        <div class="info">
         <p class="info-item"> <b> Likes: ${likes}</b></p>
         <p class="info-item"><b>Views: ${views}</b></p>
         <p class="info-item"><b>Comments: ${comments}</b></p>
