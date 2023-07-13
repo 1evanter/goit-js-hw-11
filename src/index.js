@@ -7,16 +7,20 @@ const API_KEY = '38212223-f32e704a5bd5b7c02deacefa3';
 const refs = {
     formEl: document.querySelector('.search-form'),
     loadMoreBtn: document.querySelector('.load-more'),
-    imageListEl: document.querySelector('.image-list')
+    galleryEl: document.querySelector('.gallery')
 };
 
 const imagesApiService = new ImagesApiService();
+
+refs.loadMoreBtn.style.display = 'none';
 
 refs.formEl.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(evt) {
     evt.preventDefault();
+
+    refs.loadMoreBtn.style.display = 'block';
 
     clearImageList();
     imagesApiService.query = evt.target.elements.searchQuery.value;
@@ -34,8 +38,8 @@ function onLoadMore() {
 
 function addImageCard(hits) {
  const galleryElements = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
-     return   `<li class="image-item">
-     <div class="image-item-wrap">
+     return   `<li class="gallery-item">
+     <div class="gallery-item-wrap">
         <img
           class="image"
           src="${webformatURL}"
@@ -53,11 +57,11 @@ function addImageCard(hits) {
       </li>`
  }).join('');
     
-   return refs.imageListEl.insertAdjacentHTML('beforeend', galleryElements);
+   return refs.galleryEl.insertAdjacentHTML('beforeend', galleryElements);
 }
 
 function clearImageList() {
-    refs.imageListEl.innerHTML = '';
+    refs.galleryEl.innerHTML = '';
 }
 
 

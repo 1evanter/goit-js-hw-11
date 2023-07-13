@@ -1,19 +1,16 @@
-/* img {
-    display: block;
-    width: 260px;
-} */
-
 ul {
     list-style: none;
 }
 
-.image-list {
+
+
+.gallery {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
 }
 
-.image-item {
+.gallery-item {
     width: calc((100% - 36px)/4);
     /* position: relative; */
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
