@@ -50,17 +50,16 @@ try {
 async function onLoadMore() {
     const hits = await imagesApiService.fetchImages();
 
-      if (hits.length < 40) {
-        refs.loadMoreBtn.style.display = 'none';
-      return  Notify.info("We're sorry, but you've reached the end of search results.");
-    };
-    
     try {
         addImageCard(hits);
     } catch (error) {
         throw new Error(error)
     }
-  
+
+    if (hits.length < 40) {
+        refs.loadMoreBtn.style.display = 'none';
+      return  Notify.info("We're sorry, but you've reached the end of search results.");
+    };
 }
 
 
