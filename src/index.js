@@ -16,50 +16,49 @@ refs.loadMoreBtn.style.display = 'none';
 refs.formEl.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
+
 async function onSearch(evt) {
     evt.preventDefault();
-    
+
     imagesApiService.query = evt.target.elements.searchQuery.value;
-    const hits = await imagesApiService.fetchImages();
-    
+
        if (imagesApiService.query === "") {
           return Notify.failure('Please fill in the field.');
     };
-    
+
     imagesApiService.resetPage();
 
 try {
-  
+    const hits = await imagesApiService.fetchImages();
     if (hits.length === 0) {
         return Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-    };
-    
-      clearImageList();
-        addImageCard(hits);
-          refs.loadMoreBtn.style.display = 'block';
-} catch (error) {
-    throw new Error(error);
     }
     
- if (hits.length < 40) {
+    clearImageList();
+   
+        addImageCard(hits);
+    refs.loadMoreBtn.style.display = 'block';
+    
+       if (hits.length < 40) {
         refs.loadMoreBtn.style.display = 'none';
       return  Notify.info("We're sorry, but you've reached the end of search results.");
     }
+} catch (error) {
+    throw new Error(error);
+}
 }
 
 async function onLoadMore() {
     const hits = await imagesApiService.fetchImages();
-
     try {
         addImageCard(hits);
+           if (hits.length < 40) {
+        refs.loadMoreBtn.style.display = 'none';
+      return  Notify.info("We're sorry, but you've reached the end of search results.");
+    }
     } catch (error) {
         throw new Error(error)
     }
-
-    if (hits.length < 40) {
-        refs.loadMoreBtn.style.display = 'none';
-      return  Notify.info("We're sorry, but you've reached the end of search results.");
-    };
 }
 
 
@@ -84,7 +83,6 @@ function addImageCard(hits) {
  }).join('');
     
     refs.galleryEl.insertAdjacentHTML('beforeend', galleryElements);
-
     createLightBox();
 }
 
@@ -98,6 +96,5 @@ function createLightBox() {
     captionsData: "alt",
   });
     lightbox.refresh();
-
     return;
 }
